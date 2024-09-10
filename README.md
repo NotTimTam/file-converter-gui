@@ -1,6 +1,6 @@
 # file-converter-gui
 
-Self-hostable GUI interface for file-converter.
+Self-hostable GUI interface for (@nottimtam/file-converter)[https://www.npmjs.com/package/@nottimtam/file-converter].
 
 See [file-converter](https://github.com/NotTimTam/file-converter) for general implementation instructions and API reference.
 
