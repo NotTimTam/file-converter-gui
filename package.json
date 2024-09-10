@@ -30,7 +30,8 @@
 	"homepage": "https://github.com/NotTimTam/file-converter-gui#readme",
 	"dependencies": {
 		"@nottimtam/console.js": "^1.1.1",
-		"@nottimtam/file-converter": "^1.1.1",
+		"@nottimtam/file-converter": "latest",
+		"@nottimtam/file-converter-core": "latest",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.5",
 		"express": "^4.19.2",
