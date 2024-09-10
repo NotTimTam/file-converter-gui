@@ -1,5 +1,5 @@
 {
-	"name": "test",
+	"name": "@nottimtam/file-converter-gui",
 	"version": "0.1.0",
 	"type": "module",
 	"description": "Self-hostable GUI interface for file-converter.",
