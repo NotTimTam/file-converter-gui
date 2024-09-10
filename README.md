@@ -7,7 +7,7 @@ See [file-converter](https://github.com/NotTimTam/file-converter) for general im
 ## Installation
 
 ```terminal
-npm i file-converter-gui
+npm i @nottimtam/file-converter-gui
 ```
 
 ## Spinup
