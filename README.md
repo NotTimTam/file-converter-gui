@@ -15,3 +15,24 @@ npm i file-converter-gui
 ```terminal
 npm start
 ```
+
+## Environment Variables
+
+For the application to run properly, certain environment variables need to be defined.
+
+### Example
+
+```env
+NODE_ENV=development
+API_VERSION=1
+PORT=3000
+```
+
+### Breakdown
+
+-   NODE_ENV
+    -   "production" / "development"
+-   API_VERSION
+    -   "1" (the only current API version)
+-   PORT
+    -   The port you want the server to listen on.
