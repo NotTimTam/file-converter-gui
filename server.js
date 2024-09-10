@@ -47,8 +47,9 @@ const fileConverter = new FileConverter({
 		process.env.CLEAR_JOB_ON_DOWNLOAD &&
 		process.env.CLEAR_JOB_ON_DOWNLOAD === "true",
 	DANGEROUSLYforceClearTemp:
-		process.env.DANGEROUSLY_FORCE_CLEAR_TEMP &&
-		process.env.DANGEROUSLY_FORCE_CLEAR_TEMP === "true",
+		(process.env.DANGEROUSLY_FORCE_CLEAR_TEMP &&
+			process.env.DANGEROUSLY_FORCE_CLEAR_TEMP === "true") ||
+		undefined,
 });
 
 // Use middleware and routes.
