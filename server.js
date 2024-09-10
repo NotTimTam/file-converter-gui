@@ -4,7 +4,7 @@ import next from "next";
 import cors from "cors";
 import { rateLimit } from "express-rate-limit";
 import { error, log } from "@nottimtam/console.js";
-import FileConverter from "file-converter";
+import FileConverter from "@nottimtam/file-converter";
 import modules from "file-converter-core";
 
 import pkg from "./package.json" assert { type: "json" };
