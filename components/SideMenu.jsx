@@ -7,10 +7,11 @@ import {
 	Server,
 	Workflow,
 } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const SideMenu = () => {
 	const router = useRouter();
+	const pathname = usePathname();
 
 	const menus = [
 		[
@@ -71,11 +72,7 @@ const SideMenu = () => {
 						<button
 							className="side-menu-button"
 							key={`${sectionIndex}-${itemIndex}`}
-							active={
-								window.location.pathname === route
-									? "true"
-									: undefined
-							}
+							active={pathname === route ? "true" : undefined}
 							onClick={() => router.push(route)}
 						>
 							{title}

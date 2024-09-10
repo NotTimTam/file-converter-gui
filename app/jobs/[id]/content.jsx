@@ -6,6 +6,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import styles from "./index.module.scss";
+import axios from "axios";
 
 const Content = () => {
 	// Hooks
@@ -21,28 +22,18 @@ const Content = () => {
 		setLoading(true);
 
 		try {
-			const res = await fetch(
-				`${window.location.origin}/api/v1/convert/download/${id}`,
-				{
-					cache: "no-store",
-				}
-			);
-
-			if (!res.ok) {
-				if (res.status === 404) router.push("/not-found");
-				else throw await res.text();
-			}
+			const res = await axios.get(`/api/v1/convert/download/${id}`, {
+				responseType: "blob",
+			});
 
 			const filename = res.headers
 				.get("Content-Disposition")
 				.split("; ")[1]
 				.split("=")[1];
 
-			const blob = await res.blob();
-
 			// Create a temporary link element
 			const a = document.createElement("a");
-			const url = URL.createObjectURL(blob);
+			const url = URL.createObjectURL(res.data);
 			a.href = url;
 			a.download = filename; // You can specify the filename here
 
@@ -67,14 +58,9 @@ const Content = () => {
 			const check = confirm("Are you sure you want to delete this job?");
 
 			if (check) {
-				const res = await fetch(
-					`${window.location.origin}/api/v1/jobs/${id}`,
-					{
-						method: "DELETE",
-					}
+				await axios.delete(
+					`/api/v1/jobs/${id}`
 				);
-
-				if (!res.ok) throw await res.text();
 
 				router.push(`/jobs`);
 			} else throw new Error("Job deletion request canceled.");
@@ -88,21 +74,11 @@ const Content = () => {
 		setLoading(true);
 
 		try {
-			const res = await fetch(
-				`${window.location.origin}/api/v1/jobs/${id}`,
-				{
-					cache: "no-store",
-				}
-			);
+			const {
+				data: { job },
+			} = await axios.get(`/api/v1/jobs/${id}`);
 
-			if (!res.ok) {
-				if (res.status === 404) router.push("/not-found");
-				else throw await res.text();
-			}
-
-			const { job } = await res.json();
-
-			document.title = `${job.module} Job | File Conversion GUI`;
+			document.title = `${job.module} Job | File Converter GUI`;
 
 			setJob(job);
 		} catch (err) {

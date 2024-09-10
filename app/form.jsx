@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/components/Loading";
+import axios from "axios";
 import { File } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,13 +17,15 @@ const Form = () => {
 	const [loading, setLoading] = useState(false);
 
 	const getModules = async () => {
-		const { modules } = await (
-			await fetch(`${window.location.origin}/api/v1/modules`, {
-				cache: "no-store",
-			})
-		).json();
+		try {
+			const {
+				data: { modules },
+			} = await axios.get(`/api/v1/modules`);
 
-		setModules(modules);
+			setModules(modules);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	const handleSubmit = async (e) => {
@@ -36,14 +39,12 @@ const Form = () => {
 				FD.append("files", formData.files[i]);
 			}
 
-			const res = await fetch(
-				`${window.location.origin}/api/v1/convert`,
-				{ method: "POST", body: FD }
+			const {
+				data: { jobId },
+			} = await axios.post(
+				`/api/v1/convert`,
+				FD
 			);
-
-			if (!res.ok) throw new Error(await res.text());
-
-			const { jobId } = await res.json();
 
 			router.push(`/jobs/${jobId}`);
 		} catch (err) {

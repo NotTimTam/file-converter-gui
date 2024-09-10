@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/components/Loading";
+import axios from "axios";
 import { RefreshCcw, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -17,12 +18,9 @@ const Content = () => {
 		setLoading(true);
 
 		try {
-			const res = await fetch(`${window.location.origin}/api/v1/jobs`, {
-				cache: "no-store",
-			});
-			if (!res.ok) throw await res.text();
-
-			const { jobs } = await res.json();
+			const {
+				data: { jobs },
+			} = await axios.get(`/api/v1/jobs`);
 
 			setJobs(jobs);
 		} catch (err) {
@@ -41,14 +39,7 @@ const Content = () => {
 			);
 
 			if (check) {
-				const res = await fetch(
-					`${window.location.origin}/api/v1/jobs`,
-					{
-						method: "DELETE",
-					}
-				);
-
-				if (!res.ok) throw await res.text();
+				await axios.delete(`/api/v1/jobs`);
 
 				await getJobs();
 			}

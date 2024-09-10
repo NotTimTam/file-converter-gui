@@ -72,6 +72,22 @@ progress {
 	border-radius: $border-radius;
 }
 
+a {
+	color: $em;
+
+	&:visited {
+		color: $em;
+	}
+
+	&:hover {
+		color: darken($em, 25%);
+	}
+
+	&:active {
+		color: darken($em, 50%);
+	}
+}
+
 html {
 	width: 100vw;
 	height: 100vh;

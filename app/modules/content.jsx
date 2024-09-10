@@ -1,6 +1,7 @@
 "use client";
 
 import Loading from "@/components/Loading";
+import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -11,13 +12,15 @@ const Content = () => {
 	const [modules, setModules] = useState(null);
 
 	const getModules = async () => {
-		const { modules } = await (
-			await fetch(`${window.location.origin}/api/v1/modules`, {
-				cache: "no-store",
-			})
-		).json();
+		try {
+			const {
+				data: { modules },
+			} = await axios.get(`/api/v1/modules`);
 
-		setModules(modules);
+			setModules(modules);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	useEffect(() => {

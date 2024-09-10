@@ -32,6 +32,7 @@
 		"@nottimtam/console.js": "^1.1.1",
 		"@nottimtam/file-converter": "latest",
 		"@nottimtam/file-converter-core": "latest",
+		"axios": "^1.7.7",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.5",
 		"express": "^4.19.2",
@@ -40,10 +41,12 @@
 		"lucide-react": "^0.438.0",
 		"next": "^14.2.7",
 		"react": "^18",
-		"react-dom": "^18",
-		"sass": "^1.78.0"
+		"react-dom": "^18"
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"devDependencies": {
+		"sass": "^1.78.0"
 	}
 }

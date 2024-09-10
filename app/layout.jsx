@@ -4,6 +4,7 @@ import "./main.scss";
 
 import { Jost } from "next/font/google";
 import SideMenu from "@/components/SideMenu";
+import Link from "next/link";
 
 const jost = Jost({
 	weight: "variable",
@@ -13,8 +14,8 @@ const jost = Jost({
 
 export const metadata = {
 	title: {
-		template: "%s | File Conversion GUI",
-		default: "Home | File Conversion GUI",
+		template: "%s | File Converter GUI",
+		default: "Home | File Converter GUI",
 	},
 	description: "A simple GUI interface for conversion of files.",
 };
@@ -31,7 +32,24 @@ export default function RootLayout({ children }) {
 				<SideMenu />
 				<main className="column gap padding">{children}</main>
 				<footer className="border-top background-dark box-shadow padding row gap">
-					<p>Hello, world! I'm open-source!</p>
+					<p>
+						<Link
+							target="_blank"
+							rel="noopener noreferrer"
+							href="https://www.github.com/NotTimTam/file-converter-gui"
+						>
+							Hello, world! I'm open-source!
+						</Link>{" "}
+						&mdash; Use the{" "}
+						<Link
+							target="_blank"
+							rel="noopener noreferrer"
+							href="https://www.github.com/NotTimTam/file-converter"
+						>
+							API
+						</Link>{" "}
+						in your projects!
+					</p>
 				</footer>
 			</body>
 		</html>
