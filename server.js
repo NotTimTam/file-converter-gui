@@ -41,10 +41,14 @@ log(`API Version: v${apiVersion}`);
 
 const fileConverter = new FileConverter({
 	modules,
-	fileSizeLimit: 1086666,
-	temp: "./temp",
-	clearJobOnDownload: false,
-	DANGEROUSLYforceClearTemp: true,
+	fileSizeLimit: process.env.FILE_SIZE_LIMIT,
+	temp: process.env.TEMP,
+	clearJobOnDownload:
+		process.env.CLEAR_JOB_ON_DOWNLOAD &&
+		process.env.CLEAR_JOB_ON_DOWNLOAD === "true",
+	DANGEROUSLYforceClearTemp:
+		process.env.DANGEROUSLY_FORCE_CLEAR_TEMP &&
+		process.env.DANGEROUSLY_FORCE_CLEAR_TEMP === "true",
 });
 
 // Use middleware and routes.

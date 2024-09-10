@@ -41,6 +41,8 @@ const Content = () => {
 
 			// Clean up
 			URL.revokeObjectURL(url);
+
+			if (!job.unlimitedDownloads) router.push("/jobs"); // Reroute if the file can only be downloaded once.
 		} catch (err) {
 			console.error(err);
 		}
@@ -78,6 +80,8 @@ const Content = () => {
 			setJob(job);
 		} catch (err) {
 			console.error(err);
+
+			if (err.status === 404) router.push("/not-found");
 
 			router.push("/");
 		}
@@ -133,10 +137,6 @@ const Content = () => {
 					</button>
 				)}
 
-				<sup>
-					Job ID: <b>{job._id}</b>
-				</sup>
-
 				<button
 					className="color-error border"
 					title="Delete job and files."
@@ -144,6 +144,10 @@ const Content = () => {
 				>
 					<Trash2 /> Delete Job
 				</button>
+
+				<sup>
+					Job ID: <b>{job._id}</b>
+				</sup>
 			</div>
 		</section>
 	);
