@@ -4,6 +4,7 @@
 	"type": "module",
 	"description": "Self-hostable GUI interface for @nottimtam/file-converter.",
 	"main": "server.js",
+	"private": true,
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/NotTimTam/file-converter-gui.git"

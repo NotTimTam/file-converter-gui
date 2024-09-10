@@ -16,7 +16,6 @@ const Content = () => {
 	// States
 	const [job, setJob] = useState(null);
 	const [loading, setLoading] = useState(false);
-	const [downloaded, setDownloaded] = useState(false);
 
 	const downloadFiles = async () => {
 		setLoading(true);
@@ -42,8 +41,6 @@ const Content = () => {
 
 			// Clean up
 			URL.revokeObjectURL(url);
-
-			setDownloaded(true);
 		} catch (err) {
 			console.error(err);
 		}
@@ -58,9 +55,7 @@ const Content = () => {
 			const check = confirm("Are you sure you want to delete this job?");
 
 			if (check) {
-				await axios.delete(
-					`/api/v1/jobs/${id}`
-				);
+				await axios.delete(`/api/v1/jobs/${id}`);
 
 				router.push(`/jobs`);
 			} else throw new Error("Job deletion request canceled.");
@@ -95,13 +90,6 @@ const Content = () => {
 	}, []);
 
 	if (!job || loading) return <Loading />;
-
-	if (downloaded)
-		return (
-			<section className="column gap-2 align-center">
-				File downloaded...
-			</section>
-		);
 
 	const progress = job.status.filesConverted / job.status.totalFiles;
 
