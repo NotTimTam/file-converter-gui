@@ -1,0 +1,45 @@
+{
+	"name": "test",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "Core file conversion modules for file-converter.",
+	"main": "server.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/NotTimTam/file-converter-gui.git"
+	},
+	"scripts": {
+		"dev": "npx nodemon server.js",
+		"build": "next build",
+		"start": "node server.js",
+		"lint": "next lint"
+	},
+	"keywords": [
+		"file-converter",
+		"file",
+		"conversion",
+		"module",
+		"express",
+		"api"
+	],
+	"author": "NotTimTam",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/NotTimTam/file-converter-gui/issues"
+	},
+	"homepage": "https://github.com/NotTimTam/file-converter-gui#readme",
+	"dependencies": {
+		"@nottimtam/console.js": "^1.1.1",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.5",
+		"express": "^4.19.2",
+		"express-rate-limit": "^7.4.0",
+		"file-converter-core": "github:NotTimTam/file-converter-core",
+		"flow.scss": "^1.0.72",
+		"lucide-react": "^0.438.0",
+		"next": "^14.2.7",
+		"react": "^18",
+		"react-dom": "^18",
+		"sass": "^1.78.0"
+	}
+}

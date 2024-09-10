@@ -1,0 +1,9 @@
+svg.loading {
+	animation: spin 0.5s ease-in-out infinite;
+
+	@keyframes spin {
+		100% {
+			transform: rotate(360deg);
+		}
+	}
+}

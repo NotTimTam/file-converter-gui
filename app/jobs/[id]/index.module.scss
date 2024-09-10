@@ -1,0 +1,20 @@
+@use "@/app/util.scss" as *;
+
+div.progress {
+	height: 1rem;
+	flex-grow: 2;
+
+	min-width: calc($mobile-s / 2);
+
+	background-color: $border-color;
+
+	border-radius: $border-radius * 2;
+
+	overflow: hidden;
+
+	div.fill {
+		height: 100%;
+
+		background-color: $em;
+	}
+}

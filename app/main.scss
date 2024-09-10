@@ -1,0 +1,195 @@
+@use "./util.scss" as *;
+
+.color-em {
+	color: $em;
+
+	&.border {
+		border-color: $em;
+	}
+}
+
+.color-error {
+	color: $error;
+
+	&.border {
+		border-color: $error;
+	}
+}
+
+.background {
+	background: $background;
+}
+
+.background-dark {
+	background: $background-dark;
+}
+
+.border {
+	border: $border;
+}
+
+.border-top {
+	border-top: $border;
+}
+
+.border-bottom {
+	border-bottom: $border;
+}
+
+.border-left {
+	border-left: $border;
+}
+
+.border-right {
+	border-right: $border;
+}
+
+.radius {
+	border-radius: $border-radius;
+}
+
+.box-shadow {
+	box-shadow: $box-shadow;
+}
+
+*,
+*::before,
+*::after {
+	font-family: var(--font-jost);
+}
+
+ul,
+ol {
+	padding-inline-start: $margin + $gap;
+
+	li {
+		width: max-content;
+	}
+}
+
+progress {
+	width: 100%;
+	border-radius: $border-radius;
+}
+
+html {
+	width: 100vw;
+	height: 100vh;
+
+	overflow: hidden;
+
+	color: $text;
+
+	body {
+		width: 100%;
+		height: 100%;
+
+		display: grid;
+		grid-template-columns: auto 1fr;
+		grid-template-rows: auto 1fr auto;
+
+		> header {
+			grid-column: 1 / 3;
+			grid-row: 1 / 2;
+		}
+
+		aside.side-menu {
+			grid-column: 1 / 2;
+			grid-row: 2 / 3;
+
+			border-right: $border;
+			background: $background-dark;
+			box-shadow: $box-shadow;
+			@include flex-column;
+			align-items: flex-start;
+			justify-content: space-between;
+
+			section {
+				@include flex-column;
+				align-items: flex-start;
+
+				width: 100%;
+
+				button.side-menu-button {
+					width: 100%;
+					justify-content: flex-start;
+
+					border: none;
+					border-radius: 0;
+
+					&:hover {
+						background-color: $background;
+					}
+
+					&:focus {
+						outline: none;
+					}
+
+					&[active] {
+						background-color: $em;
+						color: $background;
+					}
+				}
+			}
+		}
+
+		> main {
+			grid-column: 2 / 3;
+			grid-row: 2 / 3;
+		}
+
+		> footer {
+			grid-column: 1 / 3;
+			grid-row: 3 / 4;
+		}
+
+		@media (max-width: $tablet) {
+			@include flex-column;
+
+			justify-content: space-between;
+
+			aside.side-menu {
+				border-right: unset;
+				border-bottom: $border;
+			}
+
+			> main {
+				flex-grow: 2;
+			}
+		}
+	}
+}
+
+button {
+	@include transition;
+
+	@include flex-row;
+	gap: $gap;
+	padding: $padding;
+
+	align-items: center;
+	justify-content: center;
+
+	@include border;
+
+	user-select: none;
+
+	&:hover {
+		background: $background-dark;
+	}
+
+	&:active {
+		background: darken($background-dark, 10%);
+	}
+
+	&:focus {
+		outline: $border-width * 2 $border-style $em;
+	}
+}
+
+button,
+input,
+textarea,
+select {
+	font-size: 1rem;
+}
