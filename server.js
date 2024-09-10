@@ -4,7 +4,8 @@ import next from "next";
 import cors from "cors";
 import { rateLimit } from "express-rate-limit";
 import { error, log } from "@nottimtam/console.js";
-import FileConverter from "../index.js";
+import FileConverter from "file-converter";
+import modules from "file-converter-core";
 
 import pkg from "./package.json" assert { type: "json" };
 const { version } = pkg;
@@ -39,7 +40,7 @@ const apiRoute = `/api/v${apiVersion}`;
 log(`API Version: v${apiVersion}`);
 
 const fileConverter = new FileConverter({
-	modules: [],
+	modules,
 	fileSizeLimit: 1086666,
 	temp: "./temp",
 	clearJobOnDownload: false,
