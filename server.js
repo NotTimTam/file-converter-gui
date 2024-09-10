@@ -41,8 +41,8 @@ log(`API Version: v${apiVersion}`);
 
 const fileConverter = new FileConverter({
 	modules,
-	fileSizeLimit: process.env.FILE_SIZE_LIMIT,
-	temp: process.env.TEMP,
+	fileSizeLimit: process.env.FILE_SIZE_LIMIT && +process.env.FILE_SIZE_LIMIT,
+	temp: process.env.FILE_TEMP,
 	clearJobOnDownload:
 		process.env.CLEAR_JOB_ON_DOWNLOAD &&
 		process.env.CLEAR_JOB_ON_DOWNLOAD === "true",

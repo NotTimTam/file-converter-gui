@@ -27,6 +27,9 @@ NODE_ENV=development
 API_VERSION=1
 PORT=3000
 CLEAR_JOB_ON_DOWNLOAD=true
+FILE_TEMP=./temp
+FILE_SIZE_LIMIT=1000000000
+DANGEROUSLY_FORCE_CLEAR_TEMP=false
 ```
 
 ### Breakdown
@@ -37,11 +40,11 @@ CLEAR_JOB_ON_DOWNLOAD=true
     -   "1" (the only current API version)
 -   PORT
     -   The port you want the server to listen on.
--   [CLEAR_JOB_ON_DOWNLOAD](https://github.com/NotTimTam/file-converter#:~:text=they%20are%20converted.-,clearJobOnDownload,-%3A%20boolean%20%2D%20%28default)
+-   [CLEAR_JOB_ON_DOWNLOAD](https://github.com/NotTimTam/file-converter?tab=readme-ov-file#parameters)
     -   "true" / "false"
--   [TEMP](https://github.com/NotTimTam/file-converter#:~:text=request%2C%20in%20bytes.-,temp,-%3A%20string%20%2D%20An)
+-   [FILE_TEMP](https://github.com/NotTimTam/file-converter?tab=readme-ov-file#parameters)
     -   The directory to store files in during the conversion process.
--   [FILE_SIZE_LIMIT](https://github.com/NotTimTam/file-converter#:~:text=the%20converter%27s%20functionality.-,fileSizeLimit,-%3A%20number%20%2D%20A)
+-   [FILE_SIZE_LIMIT](https://github.com/NotTimTam/file-converter?tab=readme-ov-file#parameters)
     -   An optional maximum upload size in bytes.
--   [DANGEROUSLY_FORCE_CLEAR_TEMP](https://github.com/NotTimTam/file-converter#:~:text=DANGEROUSLYforceClearTemp)
+-   [DANGEROUSLY_FORCE_CLEAR_TEMP](https://github.com/NotTimTam/file-converter?tab=readme-ov-file#parameters)
     -   "true" / "false" **_(serious consequences for parameter misuse, do not include parameter in `.env` unless absolutely necessary)_**
