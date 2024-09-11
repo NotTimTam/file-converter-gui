@@ -10,9 +10,9 @@
 		"url": "git+https://github.com/NotTimTam/file-converter-gui.git"
 	},
 	"scripts": {
-		"dev": "npx nodemon server.js",
+		"dev": "npm i && npx nodemon server.js",
 		"build": "next build",
-		"start": "node server.js",
+		"start": "npm i && node server.js",
 		"lint": "next lint"
 	},
 	"keywords": [
@@ -31,8 +31,8 @@
 	"homepage": "https://github.com/NotTimTam/file-converter-gui#readme",
 	"dependencies": {
 		"@nottimtam/console.js": "^1.1.1",
-		"@nottimtam/file-converter": "latest",
-		"@nottimtam/file-converter-core": "latest",
+		"@nottimtam/file-converter": "^1.1.36",
+		"@nottimtam/file-converter-core": "^1.1.34",
 		"axios": "^1.7.7",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.5",

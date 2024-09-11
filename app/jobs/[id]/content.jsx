@@ -145,6 +145,24 @@ const Content = () => {
 					<Trash2 /> Delete Job
 				</button>
 
+				{job.options && (
+					<>
+						<h4>Job Options</h4>
+						<ul>
+							{Object.entries(job.options).map(
+								([name, value], index) => (
+									<li key={index}>
+										<b>{name}:</b>{" "}
+										{typeof value === "string"
+											? `"${value}"`
+											: value}
+									</li>
+								)
+							)}
+						</ul>
+					</>
+				)}
+
 				<sup>
 					Job ID: <b>{job._id}</b>
 				</sup>
