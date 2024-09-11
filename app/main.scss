@@ -212,6 +212,15 @@ select {
 
 label {
 	font-weight: 600;
+
+	&[required] {
+		&::after {
+			content: "*";
+			color: $error;
+			font-family: inherit;
+			font-size: inherit;
+		}
+	}
 }
 
 input:not([type="file"]),

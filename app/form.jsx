@@ -146,7 +146,13 @@ const Form = () => {
 								Conversion Options
 							</h3>
 							{currentModule.options.map(
-								({ description, label, type, _id }) => {
+								({
+									description,
+									label,
+									type,
+									_id,
+									required,
+								}) => {
 									const input = (() => {
 										switch (type) {
 											case "string":
@@ -155,6 +161,7 @@ const Form = () => {
 														type="string"
 														name={label}
 														id={label}
+														required={required}
 														value={
 															(formData.options &&
 																formData
@@ -183,6 +190,7 @@ const Form = () => {
 														type="number"
 														name={label}
 														id={label}
+														required={required}
 														value={
 															(formData.options &&
 																formData
@@ -207,20 +215,68 @@ const Form = () => {
 													/>
 												);
 											case "boolean":
-												break;
+												return (
+													<input
+														type="checkbox"
+														name={label}
+														id={label}
+														required={required}
+														value={
+															(formData.options &&
+																formData
+																	.options[
+																	label
+																]) ||
+															false
+														}
+														onChange={(e) =>
+															setFormData({
+																...formData,
+																options: {
+																	...(formData.options ||
+																		{}),
+																	[label]: e
+																		.target
+																		.checked
+																		? true
+																		: false,
+																},
+															})
+														}
+													/>
+												);
 										}
 									})();
+
+									const labelElement = (
+										<label
+											htmlFor={label}
+											required={required}
+										>
+											{label}
+										</label>
+									);
 
 									return (
 										<div
 											key={_id}
 											className="column gap border radius padding"
 										>
-											<label htmlFor={label}>
-												{label}
-											</label>
-											<p>{description}</p>
-											{input}
+											{type === "boolean" ? (
+												<>
+													<span className="row gap align-center">
+														{input}
+														{labelElement}
+													</span>{" "}
+													<p>{description}</p>
+												</>
+											) : (
+												<>
+													{labelElement}
+													<p>{description}</p>
+													{input}
+												</>
+											)}
 										</div>
 									);
 								}
