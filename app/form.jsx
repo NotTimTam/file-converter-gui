@@ -20,6 +20,7 @@ const Form = () => {
 	const currentModule =
 		formData &&
 		formData.module &&
+		modules &&
 		modules.find(({ label }) => label === formData.module);
 
 	const getModules = async () => {
@@ -76,9 +77,11 @@ const Form = () => {
 			setFormData({
 				...formData,
 				options: Object.fromEntries(
-					currentModule.options.map(({ label }) => {
-						return [label, undefined];
-					})
+					currentModule.options.map(
+						({ label, default: defaultValue }) => {
+							return [label, defaultValue || undefined];
+						}
+					)
 				),
 				files: undefined,
 			});
