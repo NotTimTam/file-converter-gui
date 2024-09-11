@@ -79,7 +79,7 @@ const Form = () => {
 				options: Object.fromEntries(
 					currentModule.options.map(
 						({ label, default: defaultValue }) => {
-							return [label, defaultValue || undefined];
+							return [label, defaultValue];
 						}
 					)
 				),
