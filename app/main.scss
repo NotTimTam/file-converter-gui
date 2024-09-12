@@ -149,9 +149,15 @@ html {
 			}
 		}
 
-		> main {
+		main.content {
 			grid-column: 2 / 3;
 			grid-row: 2 / 3;
+
+			@include flex-column;
+			gap: $gap;
+			padding: $padding;
+
+			overflow: auto;
 		}
 
 		> footer {

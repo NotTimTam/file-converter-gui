@@ -30,7 +30,7 @@ export default function RootLayout({ children }) {
 					</h1>
 				</header>
 				<SideMenu />
-				<main className="column gap padding">{children}</main>
+				<main className="content">{children}</main>
 				<footer className="border-top background-dark box-shadow padding row gap">
 					<p>
 						<Link

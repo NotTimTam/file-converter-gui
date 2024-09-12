@@ -64,8 +64,9 @@ const Form = () => {
 			console.error(err);
 
 			setError(err.response ? err.response.data : JSON.stringify(err));
+
+			setLoading(false);
 		}
-		setLoading(false);
 	};
 
 	useEffect(() => {
@@ -87,7 +88,20 @@ const Form = () => {
 			});
 	}, [currentModule]);
 
-	if (!modules || loading) return <Loading />;
+	if (!modules || loading)
+		return (
+			<div className="fill-h fill-w column align-center justify-center gap-2 grow">
+				<Loading />
+				{loading && modules && (
+					<p className="border padding radius emphasis">
+						Large requests may take several minutes to process...
+						You will be redirected to the conversion job once it is
+						instantiated. Site may be temporarily {'"'}unresponsive
+						{'"'} while your request is processed.
+					</p>
+				)}
+			</div>
+		);
 
 	return (
 		<form
