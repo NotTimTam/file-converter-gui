@@ -5,6 +5,7 @@ import axios from "axios";
 import { File } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import mime from "mime-types";
 
 const Form = () => {
 	// Hooks
@@ -137,7 +138,8 @@ const Form = () => {
 
 					{fromOptions.map((mimetype, index) => (
 						<option value={mimetype} key={index}>
-							{mimetype}
+							{"."}
+							{mime.extension(mimetype)}
 						</option>
 					))}
 				</select>
@@ -167,7 +169,8 @@ const Form = () => {
 							),
 						].map((mimetype, index) => (
 							<option value={mimetype} key={index}>
-								{mimetype}
+								{"."}
+								{mime.extension(mimetype)}
 							</option>
 						))}
 					</select>
