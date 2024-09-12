@@ -14,7 +14,7 @@ const Form = () => {
 
 	// States
 	const [modules, setModules] = useState(null);
-	const [formData, setFormData] = useState({ module });
+	const [formData, setFormData] = useState({});
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 
@@ -92,6 +92,22 @@ const Form = () => {
 				files: undefined,
 			});
 	}, [currentModule]);
+
+	useEffect(() => {
+		if (module && modules) {
+			const moduleData = modules.find(({ label }) => label === module);
+
+			if (moduleData)
+				setFormData({
+					...formData,
+					from:
+						moduleData.from instanceof Array
+							? moduleData.from[0]
+							: moduleData.from,
+					to: moduleData.to,
+				});
+		}
+	}, [module, modules]);
 
 	useEffect(() => {
 		setFormData({
