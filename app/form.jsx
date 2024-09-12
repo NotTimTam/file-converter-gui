@@ -4,13 +4,14 @@ import Loading from "@/components/Loading";
 import axios from "axios";
 import { File } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mime from "mime-types";
 
 const Form = () => {
 	// Hooks
 	const router = useRouter();
 	const module = useSearchParams().get("module");
+	const filesRef = useRef(undefined);
 
 	// States
 	const [modules, setModules] = useState(null);
@@ -110,9 +111,12 @@ const Form = () => {
 	}, [module, modules]);
 
 	useEffect(() => {
+		if (filesRef.current) filesRef.current.value = "";
+
 		setFormData({
 			...formData,
 			to: currentModule ? formData.to : undefined,
+			files: undefined,
 		});
 	}, [formData.from]);
 
@@ -209,6 +213,7 @@ const Form = () => {
 							multiple={true}
 							name="files"
 							id="files"
+							ref={filesRef}
 							onChange={(e) =>
 								setFormData({
 									...formData,
