@@ -19,9 +19,13 @@ const Form = () => {
 
 	const currentModule =
 		formData &&
-		formData.module &&
+		formData.from &&
+		formData.to &&
 		modules &&
-		modules.find(({ label }) => label === formData.module);
+		modules.find(
+			({ from, to }) =>
+				from.includes(formData.from) && to.includes(formData.to)
+		);
 
 	const getModules = async () => {
 		setError(null);
@@ -47,7 +51,7 @@ const Form = () => {
 		setLoading(true);
 		try {
 			const FD = new FormData();
-			FD.append("module", formData.module);
+			FD.append("module", currentModule.label);
 			for (let i = 0; i < formData.files.length; i++) {
 				FD.append("files", formData.files[i]);
 			}
@@ -88,6 +92,13 @@ const Form = () => {
 			});
 	}, [currentModule]);
 
+	useEffect(() => {
+		setFormData({
+			...formData,
+			to: currentModule ? formData.to : undefined,
+		});
+	}, [formData.from]);
+
 	if (!modules || loading)
 		return (
 			<div className="fill-h fill-w column align-center justify-center gap-2 grow">
@@ -103,34 +114,73 @@ const Form = () => {
 			</div>
 		);
 
+	const fromOptions = [...new Set(modules.map(({ from }) => from).flat())];
+
 	return (
 		<form
 			className="column gap-4 border radius box-shadow padding max-mobile-l fill-w"
 			onSubmit={handleSubmit}
 		>
-			<select
-				name="module"
-				id="module"
-				value={formData.module || ""}
-				onChange={(e) =>
-					setFormData({ ...formData, module: e.target.value })
-				}
-			>
-				<option value="" disabled>
-					Select a file conversion module.
-				</option>
-
-				{modules.map((module, index) => (
-					<option value={module.label} key={index}>
-						{module.label}
+			<div className="row gap wrap align-center">
+				<select
+					className="grow"
+					name="from"
+					id="from"
+					value={formData.from || ""}
+					onChange={(e) =>
+						setFormData({ ...formData, from: e.target.value })
+					}
+				>
+					<option value="" disabled>
+						Convert from...
 					</option>
-				))}
-			</select>
 
-			{formData.module && currentModule && (
+					{fromOptions.map((mimetype, index) => (
+						<option value={mimetype} key={index}>
+							{mimetype}
+						</option>
+					))}
+				</select>
+
+				{formData.from && (
+					<select
+						className="grow"
+						name="to"
+						id="to"
+						value={formData.to || ""}
+						onChange={(e) =>
+							setFormData({ ...formData, to: e.target.value })
+						}
+					>
+						<option value="" disabled>
+							Convert to...
+						</option>
+
+						{[
+							...new Set(
+								modules
+									.filter(
+										({ from }) =>
+											from.includes(formData.from) // Handles strings and arrays.
+									)
+									.map(({ to }) => to)
+							),
+						].map((mimetype, index) => (
+							<option value={mimetype} key={index}>
+								{mimetype}
+							</option>
+						))}
+					</select>
+				)}
+			</div>
+
+			{formData.from && formData.to && currentModule && (
 				<>
 					<p className="fill-w column align-center justify-center">
-						<b>{currentModule.description}</b>
+						<b>
+							{currentModule.label} &mdash;{" "}
+							{currentModule.description}
+						</b>
 					</p>
 
 					<div className="column gap">
