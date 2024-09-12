@@ -4,7 +4,7 @@ import Loading from "@/components/Loading";
 import axios from "axios";
 import { File } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 
 const Form = () => {
 	// Hooks
@@ -220,7 +220,6 @@ const Form = () => {
 														type="checkbox"
 														name={label}
 														id={label}
-														required={required}
 														value={
 															(formData.options &&
 																formData
@@ -251,7 +250,9 @@ const Form = () => {
 									const labelElement = (
 										<label
 											htmlFor={label}
-											required={required}
+											required={
+												required && type !== "boolean"
+											}
 										>
 											{label}
 										</label>

@@ -155,7 +155,7 @@ const Content = () => {
 										<b>{name}:</b>{" "}
 										{typeof value === "string"
 											? `"${value}"`
-											: value}
+											: JSON.stringify(value)}
 									</li>
 								)
 							)}
