@@ -131,6 +131,14 @@ const Content = () => {
 					</p>
 				</div>
 
+				{job.status.step === "error" &&
+					job.status.error &&
+					typeof job.status.error === "string" && (
+						<p className="padding border radius color-error">
+							{job.status.error}
+						</p>
+					)}
+
 				{job.status.step === "done" && (
 					<button title="Download files." onClick={downloadFiles}>
 						<Download /> Download File{"(s)"}
