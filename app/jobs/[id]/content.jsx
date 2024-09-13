@@ -117,16 +117,13 @@ const Content = () => {
 			<div className="border radius padding fill-w max-mobile-l column gap">
 				<h3>{job.module} Job</h3>
 
-				<div className="row gap justify-between align-center">
-					<p>
+				<div className="row gap align-center">
+					<p className="grow">
 						Status: <b>{job.status.step.toUpperCase()}</b>
 					</p>
-					{job.status.step !== "done" && (
-						<button title="Refresh results." onClick={getJob}>
-							<RefreshCcw size={16} />
-						</button>
-					)}
 				</div>
+
+				{job.status.step === "running" && <Loading />}
 
 				<div className="row gap fill-w align-center wrap justify-center">
 					<div className={styles.progress}>
