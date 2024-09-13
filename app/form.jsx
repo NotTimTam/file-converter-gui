@@ -83,13 +83,15 @@ const Form = () => {
 		if (currentModule)
 			setFormData({
 				...formData,
-				options: Object.fromEntries(
-					currentModule.options.map(
-						({ label, default: defaultValue }) => {
-							return [label, defaultValue];
-						}
-					)
-				),
+				options:
+					currentModule.options &&
+					Object.fromEntries(
+						currentModule.options.map(
+							({ label, default: defaultValue }) => {
+								return [label, defaultValue];
+							}
+						)
+					),
 				files: undefined,
 			});
 	}, [currentModule]);
