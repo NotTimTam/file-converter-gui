@@ -223,9 +223,10 @@ const Form = () => {
 								})
 							}
 							accept={
-								currentModule.from instanceof Array
+								formData.from ||
+								(currentModule.from instanceof Array
 									? currentModule.from.join(",")
-									: currentModule.from
+									: currentModule.from)
 							}
 						/>
 					</div>
