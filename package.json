@@ -32,7 +32,7 @@
 	"dependencies": {
 		"@nottimtam/console.js": "^1.1.1",
 		"@nottimtam/file-converter": "1.2.5",
-		"@nottimtam/file-converter-core": "1.2.7",
+		"@nottimtam/file-converter-core": "1.2.9",
 		"axios": "^1.7.7",
 		"cors": "^2.8.5",
 		"dotenv": "^16.4.5",

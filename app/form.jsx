@@ -228,150 +228,154 @@ const Form = () => {
 						/>
 					</div>
 
-					{currentModule.options && (
-						<>
-							<h3 className="align-self-center">
-								Conversion Options
-							</h3>
-							{currentModule.options.map(
-								({
-									description,
-									label,
-									type,
-									_id,
-									required,
-								}) => {
-									const input = (() => {
-										switch (type) {
-											case "string":
-												return (
-													<input
-														type="string"
-														name={label}
-														id={label}
-														required={required}
-														value={
-															(formData.options &&
-																formData
-																	.options[
-																	label
-																]) ||
-															""
-														}
-														onChange={(e) =>
-															setFormData({
-																...formData,
-																options: {
-																	...(formData.options ||
-																		{}),
-																	[label]:
-																		e.target
-																			.value,
-																},
-															})
-														}
-													/>
-												);
-											case "number":
-												return (
-													<input
-														type="number"
-														name={label}
-														id={label}
-														required={required}
-														value={
-															(formData.options &&
-																formData
-																	.options[
-																	label
-																]) ||
-															""
-														}
-														onChange={(e) =>
-															setFormData({
-																...formData,
-																options: {
-																	...(formData.options ||
-																		{}),
-																	[label]:
-																		+e
-																			.target
-																			.value,
-																},
-															})
-														}
-													/>
-												);
-											case "boolean":
-												return (
-													<input
-														type="checkbox"
-														name={label}
-														id={label}
-														value={
-															(formData.options &&
-																formData
-																	.options[
-																	label
-																]) ||
-															false
-														}
-														onChange={(e) =>
-															setFormData({
-																...formData,
-																options: {
-																	...(formData.options ||
-																		{}),
-																	[label]: e
-																		.target
-																		.checked
-																		? true
-																		: false,
-																},
-															})
-														}
-													/>
-												);
-										}
-									})();
-
-									const labelElement = (
-										<label
-											htmlFor={label}
-											required={
-												required && type !== "boolean"
+					{currentModule.options &&
+						currentModule.options.length > 0 && (
+							<>
+								<h3 className="align-self-center">
+									Conversion Options
+								</h3>
+								{currentModule.options.map(
+									({
+										description,
+										label,
+										type,
+										_id,
+										required,
+									}) => {
+										const input = (() => {
+											switch (type) {
+												case "string":
+													return (
+														<input
+															type="string"
+															name={label}
+															id={label}
+															required={required}
+															value={
+																(formData.options &&
+																	formData
+																		.options[
+																		label
+																	]) ||
+																""
+															}
+															onChange={(e) =>
+																setFormData({
+																	...formData,
+																	options: {
+																		...(formData.options ||
+																			{}),
+																		[label]:
+																			e
+																				.target
+																				.value,
+																	},
+																})
+															}
+														/>
+													);
+												case "number":
+													return (
+														<input
+															type="number"
+															name={label}
+															id={label}
+															required={required}
+															value={
+																(formData.options &&
+																	formData
+																		.options[
+																		label
+																	]) ||
+																""
+															}
+															onChange={(e) =>
+																setFormData({
+																	...formData,
+																	options: {
+																		...(formData.options ||
+																			{}),
+																		[label]:
+																			+e
+																				.target
+																				.value,
+																	},
+																})
+															}
+														/>
+													);
+												case "boolean":
+													return (
+														<input
+															type="checkbox"
+															name={label}
+															id={label}
+															value={
+																(formData.options &&
+																	formData
+																		.options[
+																		label
+																	]) ||
+																false
+															}
+															onChange={(e) =>
+																setFormData({
+																	...formData,
+																	options: {
+																		...(formData.options ||
+																			{}),
+																		[label]:
+																			e
+																				.target
+																				.checked
+																				? true
+																				: false,
+																	},
+																})
+															}
+														/>
+													);
 											}
-										>
-											{label}
-										</label>
-									);
+										})();
 
-									return (
-										<div
-											key={_id}
-											className="column gap border radius padding"
-										>
-											{type === "boolean" ? (
-												<>
-													<span className="row gap align-center">
-														{input}
+										const labelElement = (
+											<label
+												htmlFor={label}
+												required={
+													required &&
+													type !== "boolean"
+												}
+											>
+												{label}
+											</label>
+										);
+
+										return (
+											<div
+												key={_id}
+												className="column gap border radius padding"
+											>
+												{type === "boolean" ? (
+													<>
+														<span className="row gap align-center">
+															{input}
+															{labelElement}
+														</span>{" "}
+														<p>{description}</p>
+													</>
+												) : (
+													<>
 														{labelElement}
-													</span>{" "}
-													<p>{description}</p>
-												</>
-											) : (
-												<>
-													{labelElement}
-													<p>{description}</p>
-													{input}
-												</>
-											)}
-										</div>
-									);
-								}
-							)}
-						</>
-					)}
+														<p>{description}</p>
+														{input}
+													</>
+												)}
+											</div>
+										);
+									}
+								)}
+							</>
+						)}
 
 					{formData.files && formData.files.length > 0 && (
 						<button type="submit">
