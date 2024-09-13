@@ -3,7 +3,7 @@
 import Loading from "@/components/Loading";
 import { Download, RefreshCcw, Trash2 } from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import styles from "./index.module.scss";
 import axios from "axios";
@@ -12,6 +12,7 @@ const Content = () => {
 	// Hooks
 	const { id } = useParams();
 	const router = useRouter();
+	const pollingRef = useRef(null);
 
 	// States
 	const [job, setJob] = useState(null);
@@ -68,7 +69,11 @@ const Content = () => {
 	};
 
 	const getJob = async () => {
+		if (pollingRef.current === "running") return;
+
 		setLoading(true);
+
+		pollingRef.current = "running";
 
 		try {
 			const {
@@ -78,6 +83,9 @@ const Content = () => {
 			document.title = `${job.module} Job | File Converter GUI`;
 
 			setJob(job);
+
+			if (job.status && job.status.step === "running")
+				pollingRef.current = setTimeout(() => getJob(), 3000);
 		} catch (err) {
 			console.error(err);
 
@@ -91,6 +99,13 @@ const Content = () => {
 
 	useEffect(() => {
 		getJob();
+
+		return () => {
+			// Cleanup polling interval on component unmount.
+			if (pollingRef.current) {
+				clearTimeout(pollingRef.current);
+			}
+		};
 	}, []);
 
 	if (!job || loading) return <Loading />;
