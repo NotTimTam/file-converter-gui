@@ -131,7 +131,7 @@ const Content = () => {
 					</p>
 				</div>
 
-				{job.status.step === "error" &&
+				{job.status.step === "failed" &&
 					job.status.error &&
 					typeof job.status.error === "string" && (
 						<p className="padding border radius color-error">
