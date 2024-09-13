@@ -57,18 +57,14 @@ app.disable("x-powered-by");
 app.use(express.json(), cors(), limiter);
 app.use(apiRoute, fileConverter.middleware()); // The route on which to access the file converter.
 
-const startup = async () => {
-	nextApp.prepare().then(() => {
-		app.all("*", (req, res) => handler(req, res));
+nextApp.prepare().then(() => {
+	app.all("*", (req, res) => handler(req, res));
 
-		app.listen(PORT, (err) => {
-			if (err) {
-				error(err);
-			} else {
-				log(`Port: ${PORT}`);
-			}
-		});
+	app.listen(PORT, (err) => {
+		if (err) {
+			error(err);
+		} else {
+			log(`Port: ${PORT}`);
+		}
 	});
-};
-
-startup();
+});
