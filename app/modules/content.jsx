@@ -50,26 +50,38 @@ const Content = () => {
 					>
 						<h3>{label}</h3>
 						<p>{description}</p>
-						<div className="row gap-2 justify-evenly align-self-stretch">
-							<div>
+						<div className="row gap-2 justify-evenly align-self-stretch fill-w">
+							<div className="grow" style={{ maxWidth: "50%" }}>
 								<p>
 									<b>Input Mimetypes</b>
 								</p>
-								<ul>
+								<div className="fill-w">
 									{from.map((label, index) => (
-										<li key={index}>{label}</li>
+										<p
+											key={index}
+											className="fill-w"
+											style={{ wordWrap: "break-word" }}
+										>
+											{label}
+										</p>
 									))}
-								</ul>
+								</div>
 							</div>
-							<div>
+							<div className="grow" style={{ maxWidth: "50%" }}>
 								<p>
 									<b>Output Mimetypes</b>
 								</p>
-								<ul>
+								<div className="fill-w">
 									{to.map((label, index) => (
-										<li key={index}>{label}</li>
+										<p
+											key={index}
+											className="fill-w"
+											style={{ wordWrap: "break-word" }}
+										>
+											{label}
+										</p>
 									))}
-								</ul>
+								</div>
 							</div>
 						</div>
 					</button>
